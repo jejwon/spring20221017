@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("ex02")
 public class Controller02 {
 
-	// 요청경로 "/ex02/sub01"
+	// 요청경로 "/ex02/sub01" 앞의 요청 경로가 같다면 클래스 레벨로 뺄 수 있음
 	@RequestMapping("sub01")
 	public void method1() {
 		System.out.println("ex02 메소드 1 일함");
