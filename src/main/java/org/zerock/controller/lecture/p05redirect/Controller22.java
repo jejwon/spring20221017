@@ -31,7 +31,7 @@ public class Controller22 {
 	}
 	
 	@RequestMapping("sub04")
-	public void method4(HttpSession session) {
+	public void method4(HttpSession session) { 
 		String name = (String) session.getAttribute("name"); //위험
 		System.out.println(name); 
 	}
@@ -48,7 +48,7 @@ public class Controller22 {
 	}	
 	
 	@RequestMapping("sub06")
-	public void method6(HttpSession session) {
+	public void method6(HttpSession session) { 
 		Student student = (Student) session.getAttribute("student");
 		System.out.println(student.getName());
 		System.out.println(student.getClassName());
