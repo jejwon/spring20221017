@@ -28,7 +28,7 @@ public class Controller18 {
 	}
 	
 //	@RequestMapping("sub03")
-//	public void method3(@ModelAttribute Student s) { //이름이 같다면 생략 가능
+//	public void method3(@ModelAttribute Student s) { //어노테이션에서 사용할 이름과 파라미터명이 같다면 생략 가능
 //		s.setClassName("soccer");
 //		s.setName("cha");
 //		s.setStudentNumber("5");
@@ -37,7 +37,7 @@ public class Controller18 {
 //	}
 	
 	@RequestMapping("sub04")
-	public String method3(Student s) { //어노테이션 생략 가능
+	public String method3(Student s) { //어노테이션까지 생략 가능
 		s.setClassName("football");
 		s.setName("son");
 		s.setStudentNumber("7");

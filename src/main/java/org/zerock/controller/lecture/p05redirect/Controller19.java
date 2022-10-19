@@ -31,7 +31,7 @@ public class Controller19 {
 	
 	@RequestMapping("sub07")
 	public void method7(HttpServletRequest request,  HttpServletResponse response) throws IOException {
-		String location = request.getContextPath() + "/ex19/sub08"; //절대 경로일 때 바뀔 수 있는 부분은 request로 얻어오기
+		String location = request.getContextPath() + "/ex19/sub08"; //절대 경로일 때 바뀔 수 있는 부분은 request로 얻어오기(dispatcher)
 		response.sendRedirect(location);
 	}
 	

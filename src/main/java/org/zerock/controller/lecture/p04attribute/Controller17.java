@@ -48,7 +48,7 @@ public class Controller17 {
 		
 //		model.addAttributes("student", s);
 		model.addAttribute(s);
-		model.addAttribute("hello");
+		model.addAttribute("hello"); //jsp에서 lowercase로 꺼내기(이름x->string)
 	}
 
 	
