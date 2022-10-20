@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.domain.lecture.Order;
 
 @Controller
-@RequestMapping("v1020")
+@RequestMapping("prac")
 public class OrderListControl {
 	@Autowired
 	private DataSource dataSource;
