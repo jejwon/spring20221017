@@ -1,7 +1,7 @@
 -- normalization(정규화)
 -- 1 normal form (1NF) (p215)
 -- 조건1 : primary key 필수
--- 조건2 : 각 행의 데이터들은 원자적 값을 가져야함ALTER
+-- 조건2 : 각 행의 데이터들은 원자적 값을 가져야함(주관적)
 -- PRIMARY KEY (pk, 기본키, 주키, 주요키, 키) (p217)
 -- null 안됨
 -- 레코드 삽입시 값이 있어야함
