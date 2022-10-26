@@ -55,6 +55,7 @@ public class Controller27 {
 	public void method2() {
 		
 	}
+	
 	@PostMapping("sub02")
 	public void method3(
 			String fname, String lname, int salary) throws Exception { //자바빈, requestParam도 가능

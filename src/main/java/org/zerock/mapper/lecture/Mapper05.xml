@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="org.zerock.mapper.lecture.Mapper05">
+ 	<select id="getOrder" resultType="org.zerock.domain.lecture.JavaBean07">
+	SELECT o.OrderID id, 
+		   o.OrderDate  date, 
+		   e.EmployeeID  employeeId, 
+		   e.FirstName  employeeFirstName, 
+		   e.LastName  employeeLastName
+	FROM Orders o JOIN Employees e ON o.EmployeeID = e.EmployeeID
+	WHERE o.OrderID = 10248;
+ 	</select>
+ 	
+ 	<select id="getOrder2" resultMap="orderMap">
+	SELECT o.OrderID id, 
+		   o.OrderDate  date, 
+		   e.EmployeeID  employeeId, 
+		   e.FirstName  employeeFirstName, 
+		   e.LastName  employeeLastName
+	FROM Orders o JOIN Employees e ON o.EmployeeID = e.EmployeeID
+	WHERE o.OrderID = 10248;
+ 	</select>
+ 	
+ 	<resultMap type="org.zerock.domain.lecture.JavaBean08" id="orderMap">
+ 		<id column="id" property="id"/> <!-- 키 컬럼을 id 엘레먼트로 -->
+ 		<result column="date" property="date"/>
+ 		<association property="employee">
+ 			<result column="employeeId" property="id"/> <!--  association의 프로퍼티로 들어가는 프로퍼티 -->
+ 			<result column="employeeFirstName" property="firstName"/>
+ 			<result column="employeeLastName" property="lastName"/>
+ 		</association>
+ 	</resultMap>
+ 	
+ 	<select id="getProduct" resultMap="productMap">
+	SELECT p.ProductId id,
+		p.ProductName name,
+		p.Price price,
+		s.SupplierId supplierId,
+		s.SupplierName supplierName,
+		s.Phone supplierPhone
+	FROM Products p JOIN Suppliers s ON p.SupplierID = s.SupplierID
+	WHERE p.ProductID = 10;
+ 	</select>
+ 	
+ 	<resultMap type="org.zerock.domain.lecture.JavaBean09" id="productMap">
+ 		<id column="id" property="id"/> <!-- 키 컬럼을 id 엘레먼트로 -->
+ 		<result column="name" property="name"/>
+ 		<result column="price" property="price"/>
+ 		<association property="supplier">
+ 			<result column="supplierId" property="id"/>
+ 			<result column="supplierName" property="name"/>
+ 			<result column="supplierPhone" property="phone"/>
+ 		</association>
+ 	</resultMap>
+ </mapper>
