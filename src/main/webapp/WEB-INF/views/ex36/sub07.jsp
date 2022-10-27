@@ -10,35 +10,22 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<h1>주문 전체 목록</h1>
-				<table class="table">
-					<thead>
-						<tr>
-							<td>주문번호</td>
-							<td>고객아이디</td>
-							<td>직원아이디</td>
-							<td>주문일자</td>
-							<td>배송아이디</td>
-						</tr>
-					</thead>
-					<tbody>
-					<c:forEach items = "${orderList }" var = "order">
-						<tr>
-							<td>${order.orderId }</td>
-							<td>${order.customerId }</td>
-							<td>${order.employeeId }</td>
-							<td>${order.orderDate }</td>
-							<td>${order.shipperId }</td>
-						</tr>
-					</c:forEach>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+	<h1>고객 정보 입력하기</h1>
+	<form action="" method="post">
+		<input type="text" placeholder="이름" value="son" name="name">
+		<br>
+		<input type="text" placeholder="계약명" value="HM" name="contactName">
+		<br>
+		<input type="text" placeholder="주소" value="gangnam" name="address">
+		<br>
+		<input type="text" placeholder="도시" value="seoul" name="city">
+		<br>
+		<input type="text" placeholder="우편번호" value="33333" name="postalName">
+		<br>
+		<input type="text" placeholder="나라" value="korea" name="country">
+		<br>
+		<input type="submit" value="등록">
+	</form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>

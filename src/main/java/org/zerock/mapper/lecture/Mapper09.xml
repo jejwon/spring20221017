@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="org.zerock.mapper.lecture.Mapper09">
+ 	<!-- preparedStatement 쿼리의 ?는  -->
+ 	<!-- #{파라미터명} -->
+ 	<select id="getCustomerNameById" resultType="string">
+	SELECT CustomerName
+	FROM Customers
+	WHERE CustomerID = #{id}
+ 	</select>
+ 	
+ 	<select id="getEmployeeFirstNameById" resultType="string">
+ 	SELECT FirstName
+ 	FROM Employees
+ 	WHERE EmployeeID = #{id} <!-- 파라미터명은 아무거나 상관x -->
+ 	</select>
+ 	
+ 	<select id="getCustomerNameByCityAndCountry" resultType ="string">
+	SELECT CustomerName
+	FROM Customers
+	WHERE Country=#{country} AND City=#{city} ;
+ 	</select>
+ 	
+ 	<select id="getSupplierNameByCityAndCountry" resultType="string">
+	SELECT SupplierName
+	FROM Suppliers
+	WHERE City=#{city} AND Country=#{country}; 
+ 	</select>
+ 	
+ 	<select id="getContactName" resultType="string">
+	SELECT ContactName
+	FROM Customers
+	WHERE CustomerName = #{name} AND Country = #{country} <!-- 프로퍼티가 하나인데 빈이면 프로퍼티 바로쓰기(bean.~ xx) -->
+ 	</select>
+ 	
+ 	<select id="getSupplierContactName" resultType="string">
+	SELECT ContactName
+	From Suppliers
+	WHERE SupplierName = #{name} AND Country = #{country} ;
+ 	</select>
+ 	
+ 	<select id="getProductName" resultType="string">
+	SELECT ProductName
+	FROM Products
+	WHERE CategoryID = #{arg1.categoryId} <!-- 프로퍼티가 두 개 이상이면 (파라미터명.프로퍼티) 쓰기 -->
+	AND Price >= #{arg2.price} ;     <!-- 기호를 쓸 수 없다면 CDATA나 entity 사용 -->
+ 	</select>
+ </mapper>
