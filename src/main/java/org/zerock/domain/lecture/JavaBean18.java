@@ -3,7 +3,7 @@ package org.zerock.domain.lecture;
 import lombok.Data;
 
 @Data
-public class JavaBean18 {
+public class JavaBean18 { //customer
 	private int id;
 	private String name;
 	private String contactName;

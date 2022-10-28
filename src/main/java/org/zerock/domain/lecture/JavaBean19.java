@@ -3,7 +3,8 @@ package org.zerock.domain.lecture;
 import lombok.Data;
 
 @Data
-public class JavaBean19 {
+public class JavaBean19 { //supplier
+	private int id;
 	private String name;
 	private String contactName;
 	private String address;
