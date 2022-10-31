@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.board.BoardDto;
 import org.zerock.service.board.BoardService;
 
@@ -25,12 +26,19 @@ public class BoardController {
 	}
 	
 	@PostMapping("register")
-	public String register(BoardDto board) {
+	public String register(BoardDto board, RedirectAttributes rttr) { //session ok, query string ok
 		//request param 수집/가공
 		System.out.println(board);
 		
 		//business logic
-		service.register(board); //의존성 주입
+		int cnt = service.register(board); //의존성 주입
+		
+		//modal message->redirect할 때 데이터 넘겨주기
+		if(cnt == 1) {
+			rttr.addFlashAttribute("message", "새 게시물이 등록되었습니다."); //query string으로 노출 안됨
+		} else {
+			rttr.addFlashAttribute("message", "새 게시물이 등록되지 않았습니다.");
+		} // redirectAttribute->model(session에 잠깐 넣었다가 지워짐)
 		
 		// /board/list로 redirect
 		return "redirect:/board/list";
@@ -57,21 +65,34 @@ public class BoardController {
 	}
 	
 	@GetMapping("modify")
-	public void modify(int id, Model model) {
+	public void modify(int id, Model model) { //model 사용한 이유: forward하려고
 		BoardDto board = service.get(id);
 		model.addAttribute("board", board);
 	}
 	
 	@PostMapping("modify")
-	public String modify(BoardDto board) {
-		service.update(board);
+	public String modify(BoardDto board, RedirectAttributes rttr) { //redirect는 session을 거쳐야함
+		int cnt = service.update(board);
+		
+
+		if(cnt == 1) {
+			rttr.addFlashAttribute("message", board.getId() + "번 게시물이 수정되었습니다.");
+		} else {
+			rttr.addFlashAttribute("message", board.getId() + "번 게시물이 수정되지 않았습니다.");
+		}
 		
 		return "redirect:/board/list";
 	}
 	
 	@PostMapping("remove")
-	public String remove(int id) {
-		service.remove(id);
+	public String remove(int id, RedirectAttributes rttr) { 
+		int cnt = service.remove(id);
+		
+		if(cnt == 1) {
+			rttr.addFlashAttribute("message", id + "번 게시물이 삭제되었습니다.");
+		} else {
+			rttr.addFlashAttribute("message", id + "번 게시물이 삭제되지 않았습니다.");
+		}
 		
 		return "redirect:/board/list";
 	}
