@@ -17,24 +17,24 @@
 			<div class="column">
 				<h1>게시물 작성</h1>
 				<form action="" method="post">
-				<div class="mb-3">
-					<label for="" class="form-label">작성자</label>
-					<input type="text" class="form-control" name="writer"/>
-				</div>
-				<div class="mb-3">
-					<label for="" class="form-label">제목</label>
-					<input type="text" class="form-control" name="title"/>
-				</div>
-				<div class="mb-3">
-					<label for="" class="form-label">본문</label>
-					<textarea type="text" class="form-control" name="content"></textarea>
-				</div>
-				<input class="btn btn-primary" type="submit" value="등록">
+					<div class="mb-3">
+						<label for="" class="form-label">작성자</label> <input type="text"
+							class="form-control" name="writer" />
+					</div>
+					<div class="mb-3">
+						<label for="" class="form-label">제목</label> <input type="text"
+							class="form-control" name="title" />
+					</div>
+					<div class="mb-3">
+						<label for="" class="form-label">본문</label>
+						<textarea type="text" class="form-control" name="content"></textarea>
+					</div>
+					<input class="btn btn-primary" type="submit" value="등록">
 				</form>
-	
+
+			</div>
 		</div>
 	</div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -12,47 +12,66 @@
 </head>
 <body>
 	<my:navBar></my:navBar> <!-- taglib 설정 -->
-	
-	
+
+
 	<div class="container-md">
 		<div class="row">
 			<div class="column">
-	<c:if test = "${not empty message }">
-		<div class="alert alert-success">
-			${message }
+				<c:if test="${not empty message }">
+					<div class="alert alert-success">${message }</div>
+				</c:if>
+				<h1>게시물 목록</h1>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일시</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${boardList }" var="board">
+							<!-- 모델에 boardList attribute 이름을 붙이면 됨 -->
+							<tr>
+								<td>${board.id }</td>
+								<!-- 프로퍼티 추가 -->
+								<td>
+									<c:url value="/board/get" var="getLink">
+										<c:param name="id" value="${board.id }"></c:param>
+									</c:url> 
+									<a href="${getLink }"> <!-- contextpath -> c url (core tag) -->
+										${board.title }
+									</a>
+								</td>
+								<td>${board.writer }</td>
+								<td>${board.inserted }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
 		</div>
-	</c:if>
-	<h1>게시물 목록</h1>
-	<table class="table">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일시</th>
-			</tr>		
-		</thead>
-		<tbody>
-			<c:forEach items="${boardList }" var="board"> <!-- 모델에 boardList attribute 이름을 붙이면 됨 -->
-				<tr>
-					<td>${board.id }</td> <!-- 프로퍼티 추가 -->
-					<td>
-						<c:url value="/board/get" var="getLink">
-							<c:param name="id" value="${board.id }"></c:param>
-						</c:url>
-						<a href="${getLink }"> <!-- contextpath -> c url (core tag) -->
-						${board.title }
-						</a>
-					</td>
-					<td>${board.writer }</td>
-					<td>${board.inserted }</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+
+		<div class="row">
+			<div class="col">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<c:forEach begin="${pageInfo.leftPageNumber }" end="${pageInfo.rightPageNumber }" var="pageNumber">
+							<c:url value="/board/list" var="listLink">
+								<c:param name="page" value="${pageNumber }" />
+							</c:url>
+							<li class="page-item
+							<%-- 현재 페이지에 active 추가 --%>
+							${pageInfo.currentPageNumber eq pageNumber ? 'active' : '' }"
+							><a class="page-link"
+								href="${listLink }">${pageNumber }</a></li>
+						</c:forEach>
+					</ul>
+				</nav>
 			</div>
 		</div>
 	</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
