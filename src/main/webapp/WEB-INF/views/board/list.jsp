@@ -9,9 +9,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Insert title here</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-	<my:navBar></my:navBar> <!-- taglib 설정 -->
+	<my:navBar active="list"></my:navBar> <!-- taglib 설정 -->
 
 
 	<div class="container-md">
@@ -55,11 +56,38 @@
 
 		<div class="row">
 			<div class="col">
-				<nav aria-label="Page navigation example">
+				<nav class="mt-3" aria-label="Page navigation example"> <!--mt3 마진주기 -->
 					<ul class="pagination">
+						<%--맨앞 버튼은 1페이지가 아니면 존재 --%>
+						<c:if test ="${pageInfo.currentPageNumber != 1 }">
+							<c:url value="/board/list" var = "listLink">
+								<c:param name="page" value="1"/>
+								<c:param name="q" value="${param.q }"/>
+							</c:url>
+							<!-- li.page-item>a.page-link{맨앞} -->
+							<li class="page-item">
+								<a href="${listLink }" class="page-link">
+									<i class="fa-solid fa-angles-left"></i>
+								</a>
+							</li>
+						</c:if>
+						
+						<c:if test="${pageInfo.hasPrevButton }">
+							<c:url value="/board/list" var = "listLink">
+								<c:param name="page" value="${pageInfo.jumpPrevPageNumber }"/>
+								<c:param name="q" value="${param.q }"/>
+							</c:url>
+							<li class="page-item">
+								<a href="${listLink }" class="page-link">
+									<i class="fa-solid fa-angle-left"></i>
+								</a>
+							</li>
+						</c:if>
+						
 						<c:forEach begin="${pageInfo.leftPageNumber }" end="${pageInfo.rightPageNumber }" var="pageNumber">
 							<c:url value="/board/list" var="listLink">
 								<c:param name="page" value="${pageNumber }" />
+								<c:param name="q" value="${param.q }"/>
 							</c:url>
 							<li class="page-item
 							<%-- 현재 페이지에 active 추가 --%>
@@ -67,6 +95,31 @@
 							><a class="page-link"
 								href="${listLink }">${pageNumber }</a></li>
 						</c:forEach>
+						
+						<c:if test="${pageInfo.hasNextButton }">
+							<c:url value="/board/list" var = "listLink">
+								<c:param name="page" value="${pageInfo.jumpNextPageNumber }"/>
+								<c:param name="q" value="${param.q }"/>
+							</c:url>
+							<li class="page-item">
+								<a href="${listLink }" class="page-link">
+									<i class="fa-solid fa-angle-right"></i>
+								</a>
+							</li>
+						</c:if>
+						<%--맨뒤 버튼은 마지막페이지가 아니면 존재 --%>
+						<c:if test ="${pageInfo.currentPageNumber != pageInfo.lastPageNumber }">
+							<c:url value="/board/list" var = "listLink">
+								<c:param name="page" value="${pageInfo.lastPageNumber }"/>
+								<c:param name="q" value="${param.q }"/>
+							</c:url>
+							<li class="page-item">
+								<a href="${listLink }" class="page-link">
+									<i class="fa-solid fa-angles-right"></i>
+								</a>
+							</li>
+						</c:if>
+						
 					</ul>
 				</nav>
 			</div>

@@ -28,6 +28,13 @@ SELECT *
 FROM Board
 LIMIT ?, ?; -- ?1: 어디서부터(0-base),
             -- ?2: 몇 개
+            
+-- 검색 쿼리
+SELECT * 
+FROM Board
+WHERE title LIKE '%keyword%'
+	OR content LIKE '%keyword%'
+    OR writer LIKE '%keyword%' ;
 
 
 

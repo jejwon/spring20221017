@@ -53,6 +53,7 @@ public class BoardController {
 	@GetMapping("list")
 	public void list(
 			@RequestParam(name="page", defaultValue="1") int page,
+			@RequestParam(name="q", defaultValue="") String keyword,
 //			HttpServletRequest request,
 			PageInfo pageInfo,
 //			@ModelAttribute("pageInfo") PageInfo pageInfo,  //model 객체 (생략)
@@ -62,7 +63,7 @@ public class BoardController {
 //		pageInfo.setLastPageNumber(Integer.parseInt(request.getParameter("lastPageNumber")));
 //		model.addAttribute("pageInfo", pageInfo);
 		//business logic
-		List<BoardDto> list = service.listBoard(page, pageInfo);
+		List<BoardDto> list = service.listBoard(page, keyword, pageInfo);
 		//add attribute
 		model.addAttribute("boardList", list); //jsp이름 참고
 		//forward
