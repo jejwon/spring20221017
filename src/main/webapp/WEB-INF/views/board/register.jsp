@@ -11,27 +11,29 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
-	<my:navBar></my:navBar>
+	<my:navBar active="register"></my:navBar>
 	<div class="container-md">
 		<div class="row">
-			<div class="column">
+			<div class="col">
 				<h1>게시물 작성</h1>
 				<form action="" method="post">
 					<div class="mb-3">
-						<label for="" class="form-label">작성자</label> <input type="text"
-							class="form-control" name="writer" />
-					</div>
-					<div class="mb-3">
-						<label for="" class="form-label">제목</label> <input type="text"
-							class="form-control" name="title" />
+						<label for="" class="form-label">제목</label>
+						<input type="text" class="form-control" name="title">
 					</div>
 					<div class="mb-3">
 						<label for="" class="form-label">본문</label>
-						<textarea type="text" class="form-control" name="content"></textarea>
+						<textarea rows="5" class="form-control" name="content"></textarea>
 					</div>
+					<div class="mb-3">
+						<label for="" class="form-label">작성자</label>
+						<input type="text" class="form-control" name="writer">
+					</div>
+					
 					<input class="btn btn-primary" type="submit" value="등록">
+				
+				
 				</form>
-
 			</div>
 		</div>
 	</div>

@@ -49,25 +49,41 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
-	// 위 list메소드 파라미터 PageInfo에 일어나는 일을 풀어서 작성
 	@GetMapping("list")
 	public void list(
-			@RequestParam(name="page", defaultValue="1") int page,
-			@RequestParam(name="q", defaultValue="") String keyword,
-//			HttpServletRequest request,
+			@RequestParam(name = "page", defaultValue = "1") int page,
+			@RequestParam(name = "t", defaultValue = "all") String type,
+			@RequestParam(name = "q", defaultValue = "") String keyword,
 			PageInfo pageInfo,
-//			@ModelAttribute("pageInfo") PageInfo pageInfo,  //model 객체 (생략)
 			Model model) {
-		//request param
-//		PageInfo pageInfo = new PageInfo();
-//		pageInfo.setLastPageNumber(Integer.parseInt(request.getParameter("lastPageNumber")));
-//		model.addAttribute("pageInfo", pageInfo);
-		//business logic
-		List<BoardDto> list = service.listBoard(page, keyword, pageInfo);
-		//add attribute
-		model.addAttribute("boardList", list); //jsp이름 참고
-		//forward
+		// request param
+		// business logic
+		List<BoardDto> list = service.listBoard(page, type, keyword, pageInfo);
+		
+		// add attribute
+		model.addAttribute("boardList", list);
+		// forward
 	}
+
+	// 위 list 메소드 파라미터 PageInfo에 일어나는 일을 풀어서 작성
+	/*
+	private void list2(
+			@RequestParam(name = "page", defaultValue = "1") int page,
+			HttpServletRequest request,
+			Model model) {
+		// request param
+		PageInfo pageInfo = new PageInfo();
+		pageInfo.setLastPageNumber(Integer.parseInt(request.getParameter("lastPageNumber")));
+		model.addAttribute("pageInfo", pageInfo);
+		
+		// business logic
+		List<BoardDto> list = service.listBoard(page, pageInfo);
+		
+		// add attribute
+		model.addAttribute("boardList", list);
+		// forward
+	}
+	*/
 	
 	@GetMapping("get")
 	public void get(@RequestParam(name="id") int id, Model model) { //@requestParam 생략 가능 (query string이 들어감)
@@ -81,7 +97,7 @@ public class BoardController {
 	}
 	
 	@GetMapping("modify")
-	public void modify(int id, Model model) { //model 사용한 이유: forward하려고
+	public void modify(int id, Model model) { //model 사용: forward하려고
 		BoardDto board = service.get(id);
 		model.addAttribute("board", board);
 	}

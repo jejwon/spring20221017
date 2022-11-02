@@ -12,15 +12,19 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-	<my:navBar active="list"></my:navBar> <!-- taglib 설정 -->
-
-
+	<my:navBar active="list"></my:navBar>
+	
 	<div class="container-md">
 		<div class="row">
-			<div class="column">
+			<div class="col">
+			
+
 				<c:if test="${not empty message }">
-					<div class="alert alert-success">${message }</div>
+					<div class="alert alert-success">
+						${message }
+					</div>
 				</c:if>
+				
 				<h1>게시물 목록</h1>
 				<table class="table">
 					<thead>
@@ -32,95 +36,102 @@
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${boardList }" var="board">
-							<!-- 모델에 boardList attribute 이름을 붙이면 됨 -->
+						<c:forEach items="${boardList}" var="board">
 							<tr>
 								<td>${board.id }</td>
-								<!-- 프로퍼티 추가 -->
 								<td>
 									<c:url value="/board/get" var="getLink">
 										<c:param name="id" value="${board.id }"></c:param>
-									</c:url> 
-									<a href="${getLink }"> <!-- contextpath -> c url (core tag) -->
+									</c:url>
+									<a href="${getLink }">
 										${board.title }
 									</a>
 								</td>
 								<td>${board.writer }</td>
 								<td>${board.inserted }</td>
 							</tr>
-						</c:forEach>
+						</c:forEach> 
 					</tbody>
 				</table>
 			</div>
 		</div>
-
+		
+		<!-- .row>.col -->
 		<div class="row">
 			<div class="col">
-				<nav class="mt-3" aria-label="Page navigation example"> <!--mt3 마진주기 -->
-					<ul class="pagination">
-						<%--맨앞 버튼은 1페이지가 아니면 존재 --%>
-						<c:if test ="${pageInfo.currentPageNumber != 1 }">
-							<c:url value="/board/list" var = "listLink">
-								<c:param name="page" value="1"/>
-								<c:param name="q" value="${param.q }"/>
-							</c:url>
-							<!-- li.page-item>a.page-link{맨앞} -->
-							<li class="page-item">
-								<a href="${listLink }" class="page-link">
-									<i class="fa-solid fa-angles-left"></i>
-								</a>
-							</li>
-						</c:if>
-						
-						<c:if test="${pageInfo.hasPrevButton }">
-							<c:url value="/board/list" var = "listLink">
-								<c:param name="page" value="${pageInfo.jumpPrevPageNumber }"/>
-								<c:param name="q" value="${param.q }"/>
-							</c:url>
-							<li class="page-item">
-								<a href="${listLink }" class="page-link">
-									<i class="fa-solid fa-angle-left"></i>
-								</a>
-							</li>
-						</c:if>
-						
-						<c:forEach begin="${pageInfo.leftPageNumber }" end="${pageInfo.rightPageNumber }" var="pageNumber">
-							<c:url value="/board/list" var="listLink">
-								<c:param name="page" value="${pageNumber }" />
-								<c:param name="q" value="${param.q }"/>
-							</c:url>
-							<li class="page-item
-							<%-- 현재 페이지에 active 추가 --%>
-							${pageInfo.currentPageNumber eq pageNumber ? 'active' : '' }"
-							><a class="page-link"
-								href="${listLink }">${pageNumber }</a></li>
-						</c:forEach>
-						
-						<c:if test="${pageInfo.hasNextButton }">
-							<c:url value="/board/list" var = "listLink">
-								<c:param name="page" value="${pageInfo.jumpNextPageNumber }"/>
-								<c:param name="q" value="${param.q }"/>
-							</c:url>
-							<li class="page-item">
-								<a href="${listLink }" class="page-link">
-									<i class="fa-solid fa-angle-right"></i>
-								</a>
-							</li>
-						</c:if>
-						<%--맨뒤 버튼은 마지막페이지가 아니면 존재 --%>
-						<c:if test ="${pageInfo.currentPageNumber != pageInfo.lastPageNumber }">
-							<c:url value="/board/list" var = "listLink">
-								<c:param name="page" value="${pageInfo.lastPageNumber }"/>
-								<c:param name="q" value="${param.q }"/>
-							</c:url>
-							<li class="page-item">
-								<a href="${listLink }" class="page-link">
-									<i class="fa-solid fa-angles-right"></i>
-								</a>
-							</li>
-						</c:if>
-						
-					</ul>
+				<nav class="mt-3" aria-label="Page navigation example">
+				  <ul class="pagination justify-content-center">
+				  
+				  	<%-- 맨앞 버튼은 1페이지가 아니면 존재함 --%>
+				  	<c:if test="${pageInfo.currentPageNumber ne 1 }">
+				  		<c:url value="/board/list" var="listLink">
+				  			<c:param name="page" value="1" />
+				  			<c:param name="q" value="${param.q }" />
+				  			<c:param name="t" value="${param.t }" />
+				  		</c:url>
+				  		<!-- li.page-item>a.page-link{맨앞버튼} -->
+						<li class="page-item">
+							<a href="${listLink }" class="page-link">
+								<i class="fa-solid fa-angles-left"></i>
+							</a>
+						</li>
+				  	</c:if>
+				  	
+				  	<c:if test="${pageInfo.hasPrevButton }">
+				  		<c:url value="/board/list" var="listLink">
+				  			<c:param name="page" value="${pageInfo.jumpPrevPageNumber }"></c:param>
+				  			<c:param name="q" value="${param.q }" />
+				  			<c:param name="t" value="${param.t }" />
+				  		</c:url>
+				  		<li class="page-item">
+				  			<a href="${listLink }" class="page-link">
+				  				<i class="fa-solid fa-angle-left"></i>
+				  			</a>
+				  		</li>
+				  	</c:if>
+				  
+				  	<c:forEach begin="${pageInfo.leftPageNumber }" end="${pageInfo.rightPageNumber }" var="pageNumber">
+				  		<c:url value="/board/list" var="listLink">
+				  			<c:param name="page" value="${pageNumber }" />
+				  			<c:param name="q" value="${param.q }" />
+				  			<c:param name="t" value="${param.t }" />
+				  		</c:url>
+					    <li class="page-item
+					    
+					    	<%-- 현재페이지에 active 클래스 추가 --%>
+					    	${pageInfo.currentPageNumber eq pageNumber ? 'active' : '' }
+					    
+					    "><a class="page-link" href="${listLink }">${pageNumber }</a></li>
+				  	</c:forEach>
+				  	
+				  	<c:if test="${pageInfo.hasNextButton }">
+				  		<c:url value="/board/list" var="listLink">
+				  			<c:param name="page" value="${pageInfo.jumpNextPageNumber }"></c:param>
+				  			<c:param name="q" value="${param.q }" />
+				  			<c:param name="t" value="${param.t }" />
+				  		</c:url>
+				  		<li class="page-item">
+				  			<a href="${listLink }" class="page-link">
+				  				<i class="fa-solid fa-angle-right"></i>
+				  			</a>
+				  		</li>
+				  	</c:if>
+				  	
+				  	
+				  	<c:if test="${pageInfo.currentPageNumber ne pageInfo.lastPageNumber }">
+				  		<c:url value="/board/list" var="listLink">
+				  			<c:param value="${pageInfo.lastPageNumber }" name="page" />
+				  			<c:param name="q" value="${param.q }" />
+				  			<c:param name="t" value="${param.t }" />
+				  		</c:url>
+				  		<!-- li.page-item>a.page-link{맨뒤버튼} -->
+				  		<li class="page-item">
+				  			<a href="${listLink }" class="page-link">
+				  				<i class="fa-solid fa-angles-right"></i>
+				  			</a>
+				  		</li>
+				  	</c:if>
+				  </ul>
 				</nav>
 			</div>
 		</div>
