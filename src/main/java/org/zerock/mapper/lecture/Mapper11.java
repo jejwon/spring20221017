@@ -13,4 +13,10 @@ public interface Mapper11 {
 	JavaBean19 getSupplierById(int id);
 	
 	int updateBank(int account, int money);
+
+	int insertCustomer(JavaBean18 customer);
+
+	int insertSupplier(JavaBean19 supplier);
+
+	int deleteCustomer(int id);
 }
