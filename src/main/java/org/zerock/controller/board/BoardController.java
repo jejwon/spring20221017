@@ -23,7 +23,7 @@ import org.zerock.service.board.BoardService;
 @RequestMapping("board")
 public class BoardController {
 	@Autowired
-	private BoardService service;
+	private BoardService service; // business logic bean 의존성 주입
 	
 	@GetMapping("register")
 	public void register() {
@@ -31,9 +31,9 @@ public class BoardController {
 		//링크 자체 /WEB-INF/views/board/register.jsp
 	}
 	
-	@PostMapping("register")
+	@PostMapping("register") // key값 넘기기
 	public String register(BoardDto board, 
-			MultipartFile file,
+			MultipartFile[] files,
 			RedirectAttributes rttr) { //session ok, query string ok
 		// * 파일업로드
 		// 1. web.xml 
@@ -42,10 +42,12 @@ public class BoardController {
 		// 3. Controller의 메소드 argument type : MultipartFile 
 
 		//request param 수집/가공
-		System.out.println(board);
-		System.out.println(file.getOriginalFilename());
+//		System.out.println(files.length);
+//		for(MultipartFile file : files) {
+//			System.out.println(file.getOriginalFilename());
+//		}
 		//business logic
-		int cnt = service.register(board, file); //의존성 주입
+		int cnt = service.register(board, files); //의존성 주입
 		
 		//modal message->redirect할 때 데이터 넘겨주기
 		if(cnt == 1) {

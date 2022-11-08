@@ -21,30 +21,30 @@ public class BoardService {
 	
 	@Autowired
 	private ReplyMapper replyMapper;
-	
 	@Transactional
-	public int register(BoardDto board, MultipartFile file) {
+	public int register(BoardDto board, MultipartFile[] files) {
 		// db에 게시물 정보 저장
 		int cnt = boardMapper.insert(board);
 		
-		if(file != null && file.getSize() > 0) {
-			// db에 파일정보 저장(파일명, 게시물 id)
-			boardMapper.insertFile(board.getId(), file.getOriginalFilename());
-			
-			
-			
-			// 파일 저장
-			// board id 이름의 새폴더 만들기
-			File folder = new File("C:\\Users\\user\\Desktop\\study\\upload\\prj1\\board\\" + board.getId());
-			folder.mkdirs();
-			File dest = new File(folder, file.getOriginalFilename());
-			
-			try {
-				file.transferTo(dest); //받은 파일을 목적지로 보내줌
-			} catch (IOException e) {
-				//@Transactional은 RuntimeException에서만 rollback됨
-				e.printStackTrace();
-				throw new RuntimeException(e);
+		for (MultipartFile file : files) {
+			if (file != null && file.getSize() > 0) {
+				// db에 파일 정보 저장
+				boardMapper.insertFile(board.getId(), file.getOriginalFilename());
+				
+				// 파일 저장
+				// board id 이름의 새폴더 만들기
+				File folder = new File("C:\\Users\\user\\Desktop\\study\\upload\\prj1\\board\\" + board.getId());
+				folder.mkdirs();
+				
+				File dest = new File(folder, file.getOriginalFilename());
+				
+				try {
+					file.transferTo(dest);
+				} catch (Exception e) {
+					// @Transactional은 RuntimeException에서만 rollback 됨
+					e.printStackTrace();
+					throw new RuntimeException(e);
+				}
 			}
 		}
 		
