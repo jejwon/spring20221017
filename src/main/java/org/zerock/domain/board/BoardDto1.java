@@ -2,6 +2,8 @@ package org.zerock.domain.board;
 
 import java.time.LocalDate;
 
+import lombok.Data;
+@Data
 public class BoardDto1 {
 	private int id;
 	private String title;

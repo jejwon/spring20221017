@@ -8,4 +8,13 @@
  		INSERT INTO Board1 (title, content, writer)
  		VALUES (#{title}, #{content}, #{writer})
  	</insert>
+ 	
+ 	<select id="list">
+ 	SELECT 
+ 		id,
+ 		title, 
+ 		writer, 
+ 		inserted
+ 	FROM Board 
+ 	</select>
  </mapper>
