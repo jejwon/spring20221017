@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-	<my:navBar active="list"></my:navBar>
+<my:navBar active="list"></my:navBar>
 	
 	<div class="container-md">
 		<div class="row">
@@ -46,9 +46,16 @@
 									<a href="${getLink }">
 										${board.title }
 									</a>
+									
+									<c:if test="${board.countReply > 0 }">
+										<span class="badge rounded-pill text-bg-light">
+											<i class="fa-regular fa-comment-dots"></i>
+											${board.countReply }
+										</span>
+									</c:if>
 								</td>
 								<td>${board.writer }</td>
-								<td>${board.inserted }</td>
+								<td>${board.ago }</td>
 							</tr>
 						</c:forEach> 
 					</tbody>

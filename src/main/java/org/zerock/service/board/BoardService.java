@@ -1,10 +1,13 @@
 package org.zerock.service.board;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import org.zerock.domain.board.BoardDto;
 import org.zerock.domain.board.PageInfo;
 import org.zerock.mapper.board.BoardMapper;
@@ -19,8 +22,33 @@ public class BoardService {
 	@Autowired
 	private ReplyMapper replyMapper;
 	
-	public int register(BoardDto board) {
-		return boardMapper.insert(board);
+	@Transactional
+	public int register(BoardDto board, MultipartFile file) {
+		// db에 게시물 정보 저장
+		int cnt = boardMapper.insert(board);
+		
+		if(file != null && file.getSize() > 0) {
+			// db에 파일정보 저장(파일명, 게시물 id)
+			boardMapper.insertFile(board.getId(), file.getOriginalFilename());
+			
+			
+			
+			// 파일 저장
+			// board id 이름의 새폴더 만들기
+			File folder = new File("C:\\Users\\user\\Desktop\\study\\upload\\prj1\\board\\" + board.getId());
+			folder.mkdirs();
+			File dest = new File(folder, file.getOriginalFilename());
+			
+			try {
+				file.transferTo(dest); //받은 파일을 목적지로 보내줌
+			} catch (IOException e) {
+				//@Transactional은 RuntimeException에서만 rollback됨
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+		}
+		
+		return cnt;
 	}
 
 	public List<BoardDto> listBoard(int page, String type, String keyword, PageInfo pageInfo) {
