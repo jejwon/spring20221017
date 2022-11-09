@@ -93,7 +93,7 @@
 		content = #{content},
 		writer = #{writer}
 	WHERE
-		id = #{id}
+	  	id = #{id}
 	</update>
 	
 	<delete id="delete">
