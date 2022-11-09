@@ -18,14 +18,14 @@
 	</c:if>
 	<h1>${board.id }번 게시물 수정</h1>
 	 --%>
-		<my:navBar></my:navBar>
+<my:navBar></my:navBar>
 	<div class="container-md">
 		<div class="row">
 			<div class="col">
 
 				<h1>${board.id }번 게시물 수정</h1>
 				
-				<form id="modifyForm" action="" method="post">
+				<form id="modifyForm" action="" method="post" enctype="multipart/form-data">
 					<input type="hidden" name="id" value="${board.id }">
 					<!-- .mb-3*4>label.form-label+input.form-control -->
 					<div class="mb-3">
@@ -36,14 +36,30 @@
 						<label for="" class="form-label">본문</label>
 						<textarea rows="5" name="content" class="form-control">${board.content }</textarea>
 					</div>
+					
 					<%-- 이미지 출력 --%>
-					<div>
+					<div class="mb-3">
 						<c:forEach items="${board.fileName }" var="name">
-							<div>
-								<img class="img-fluid img-thumbnail" src="/image/${board.id }/${name}" alt="">
+							<div class="row">
+								<div class="col-2">
+									<%-- 삭제 여부 체크박스 --%>
+									삭제
+									<input type="checkbox" name="removeFiles" value="${name }">
+								</div>
+								<div class="col-10">
+									<div>
+										<img class="img-fluid img-thumbnail" src="/image/${board.id }/${name}" alt="">
+									</div>
+								</div>
 							</div>
 						</c:forEach>		
-					</div>				
+					</div>
+					
+					<div class="mb-3">
+						<label for="" class="form-label">파일 추가</label>
+						<input multiple type="file" accept="image/*" class="form-control" name="files">
+					</div>
+					
 					<div class="mb-3">
 						<label for="" class="form-label">작성자</label>
 						<input type="text" name="writer" class="form-control" value="${board.writer }">
@@ -102,10 +118,11 @@
 	    </div>
 	  </div>
 	</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script>
-	<!-- div->modal 전에: 동작xx-->
-	//수정확인 버튼 클릭하면 수정 form 전송
+	// 수정확인 버튼 클릭하면 수정 form 전송
 	document.querySelector("#modifyConfirmButton").addEventListener("click", function() {
 		document.querySelector("#modifyForm").submit();
 	});
@@ -115,6 +132,8 @@
 		document.querySelector("#removeForm").submit();
 	});
 </script>
-
 </body>
 </html>
+
+
+
