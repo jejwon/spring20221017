@@ -8,6 +8,6 @@ public interface BoardMapper1 {
 
 	int insert(BoardDto1 board);
 
-	//List<BoardDto1> list();
+	List<BoardDto1> list();
 	
 }

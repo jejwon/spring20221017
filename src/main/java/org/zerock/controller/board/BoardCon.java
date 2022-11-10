@@ -18,22 +18,24 @@ public class BoardCon {
 	private BoardService1 service;
 
 	@GetMapping("registerEx")
-	public void register() {
+	public void register() { 
 		// 메소드 자체로 링크 생성
 	}
 
 	@PostMapping("registerEx")
 	public String register(BoardDto1 board) {
-		//System.out.println(board);
+		System.out.println(board);
 		service.register(board);
-		return "redirect:boardEx/listEx";
+		return "redirect:/board1/listEx";
 	}
-	/*
-	 * 
-	 * @GetMapping("listEx") public void list(Model model) {
-	 * 
-	 * List<BoardDto1> list = service.listBoard();
-	 * 
-	 * model.addAttribute("boardList", list); }
-	 */
+	
+	 
+	 @GetMapping("listEx") 
+	 public void list(Model model) {
+	  
+	 List<BoardDto1> list = service.listBoard();
+	 
+	 model.addAttribute("boardList", list); 
+	 }
+	
 }

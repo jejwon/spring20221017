@@ -17,7 +17,7 @@ public class BoardService1 { //mapper에 넘기기
 		 mapper.insert(board);
 	}
 
-//	public List<BoardDto1> listBoard() {
-//		return mapper.list();
-//	}
+	public List<BoardDto1> listBoard() {
+		return mapper.list();
+	}
 }

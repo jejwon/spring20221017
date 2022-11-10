@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h1>게시물 목록</h1>
-	<table>
+	<table class="table">
 		<thead>
 			<tr>
 				<th>#</th>
