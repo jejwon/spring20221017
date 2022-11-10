@@ -2,7 +2,6 @@ package org.zerock.controller.board;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,22 +16,24 @@ import org.zerock.service.board.BoardService1;
 public class BoardCon {
 	@Autowired
 	private BoardService1 service;
-	
+
 	@GetMapping("registerEx")
 	public void register() {
-		//메소드 자체로 링크 생성
+		// 메소드 자체로 링크 생성
 	}
-	
+
 	@PostMapping("registerEx")
 	public String register(BoardDto1 board) {
-		service.register();
+		//System.out.println(board);
+		service.register(board);
 		return "redirect:boardEx/listEx";
 	}
-	
-	@GetMapping("listEx")
-	public void list() {
-		List<BoardDto1> list = service.listBoard(Model model);
-	}
-	
-	
+	/*
+	 * 
+	 * @GetMapping("listEx") public void list(Model model) {
+	 * 
+	 * List<BoardDto1> list = service.listBoard();
+	 * 
+	 * model.addAttribute("boardList", list); }
+	 */
 }

@@ -9,12 +9,12 @@
  		VALUES (#{title}, #{content}, #{writer})
  	</insert>
  	
- 	<select id="list">
+ 	<select id="list" resultType="org.zerock.domain.board.BoardDto1">
  	SELECT 
  		id,
  		title, 
- 		writer, 
- 		inserted
- 	FROM Board 
+ 		writer
+ 	FROM Board1 
+ 	ORDER BY id DESC
  	</select>
  </mapper>

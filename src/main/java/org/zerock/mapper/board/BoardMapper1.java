@@ -6,8 +6,8 @@ import org.zerock.domain.board.BoardDto1;
 
 public interface BoardMapper1 {
 
-	int insert();
+	int insert(BoardDto1 board);
 
-	List<BoardDto1> list();
+	//List<BoardDto1> list();
 	
 }
