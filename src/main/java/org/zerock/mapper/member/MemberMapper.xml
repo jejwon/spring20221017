@@ -9,7 +9,7 @@
  	VALUES (#{id}, #{password}, #{email})
  	</insert>
  	
- 	<select id="selectAll" resultType="org.zerock.domain.member.MemberDto">
+ 	<select id="selectAll" resultType="org.zerock.domain.member.MemberDto"> <!-- dto프로퍼티명과 같으면 map 안쓰고 type으로 -->
  	SELECT 
  		id,
  		'숨김' password, <!--텍스트가 리턴됨  -->
@@ -19,4 +19,13 @@
  	ORDER BY id
  	</select>
  	
+ 	<select id="selectById" resultType="org.zerock.domain.member.MemberDto">
+ 	SELECT 
+ 		id,
+ 		password,
+ 		email,
+ 		inserted
+ 	FROM Member
+ 	WHERE id = #{id}
+ 	</select>
  </mapper>

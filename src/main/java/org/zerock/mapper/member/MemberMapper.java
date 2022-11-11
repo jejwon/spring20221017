@@ -9,5 +9,7 @@ public interface MemberMapper {
 	int insert(MemberDto member);
 
 	List<MemberDto> selectAll();
+
+	MemberDto selectById(String id);
 	
 }
