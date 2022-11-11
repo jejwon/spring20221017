@@ -13,7 +13,8 @@
  	SELECT 
  		id,
  		title, 
- 		writer
+ 		writer,
+ 		inserted
  	FROM Board1 
  	ORDER BY id DESC
  	</select>

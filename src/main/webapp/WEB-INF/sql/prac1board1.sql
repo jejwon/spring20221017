@@ -1,0 +1,19 @@
+CREATE DATABASE prac1;
+USE prac1;
+CREATE TABLE Board1 (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	title VARCHAR(255) NOT NULL,
+    writer VARCHAR(255) NOT NULL,
+    content VARCHAR(1000) NOT NULL,
+	inserted DATETIME NOT NULL DEFAULT NOW()
+);
+
+SELECT * FROM Board1 ORDER BY 1 DESC;
+DESC Board1;
+
+ALTER TABLE Board
+ADD COLUMN writer VARCHAR(255) NOT NULL; -- null xx -> "" oo
+
+-- 작성일시 칼럼 추가 /default 값이 있어서 mapper수정 안해도됨
+ALTER TABLE Board
+ADD COLUMN inserted DATETIME NOT NULL DEFAULT NOW(); 

@@ -47,5 +47,3 @@ CREATE TABLE File(
 SELECT * FROM File ORDER BY 1 DESC;
 
 -- 여러 파일 있는 게시물 조회
-
-
