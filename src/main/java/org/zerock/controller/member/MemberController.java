@@ -41,19 +41,27 @@ public class MemberController {
 		model.addAttribute("memberList", service.list());
 	}
 	
-	@GetMapping("info")
+	@GetMapping({"info", "modify"})
 	public void get(String id, Model model) {
 		
 		model.addAttribute("member", service.getById(id));
 	}
 	
-	@GetMapping("modify")
-	public void get() {
+
+	@PostMapping("modify")
+	public String modify(MemberDto member, RedirectAttributes rttr) {
+		int cnt = service.modify(member);
 		
+		rttr.addAttribute("id", member.getId());
+		if (cnt == 1) {
+			rttr.addFlashAttribute("message", "회원 정보가 수정되었습니다.");
+			return "redirect:/member/info";
+		} else {
+			rttr.addFlashAttribute("message", "회원 정보가 수정되지 않았습니다.");
+			return "redirect:/member/modify";
+		}
 	}
 }
-
-
 
 
 
