@@ -36,5 +36,11 @@ public class MemberService {
 		return cnt; 
 	}
 
+	public int remove(String id) {
+		return mapper.deleteById(id);
+	}
+
 }
+
+
 

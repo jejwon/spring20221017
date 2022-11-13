@@ -38,4 +38,10 @@
 		id = #{id}
 	
 	</update>
+	
+	<delete id="deleteById">
+	DELETE FROM Member
+	WHERE id = #{id}
+	</delete>
+	
  </mapper>
