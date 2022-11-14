@@ -44,4 +44,18 @@
 	WHERE id = #{id}
 	</delete>
 	
+	
+	
+	<select id="selectByEmail" resultType="org.zerock.domain.member.MemberDto">
+	SELECT 
+		id,
+		password,
+		email,
+		inserted
+	FROM
+		Member
+	WHERE
+		email = #{email}
+	</select>
+	
  </mapper>

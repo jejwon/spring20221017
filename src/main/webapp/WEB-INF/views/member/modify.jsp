@@ -11,7 +11,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
-		
 	<my:navBar></my:navBar>
 	
 	<div class="container-md">
@@ -55,10 +54,10 @@
 							이메일 
 						</label>
 						<div class="input-group">
-							<input class="form-control" type="email" value="${member.email }" name="email">
-							<button type="button" class="btn btn-outline-secondary">중복확인</button>
+							<input id="emailInput1" class="form-control" type="email" value="${member.email }" name="email" data-old-value="${member.email }"> 
+							<button disabled id="emailButton1" type="button" class="btn btn-outline-secondary">중복확인</button>
 						</div>
-						<div class="form-text">확인 메시지....</div>
+						<div id="emailText1" class="form-text"></div>
 					</div>
 					<div class="mb-3">
 						<label for="" class="form-label">
@@ -120,6 +119,45 @@
 	</div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script>
+const ctx = "${pageContext.request.contextPath}";
+
+<%-- 이메일 중복확인 --%>
+const emailInput1 = document.querySelector("#emailInput1");
+const emailButton1 = document.querySelector("#emailButton1");
+const emailText1 = document.querySelector("#emailText1");
+
+// 이메일 중복확인 버튼 클릭하면
+emailButton1.addEventListener("click", function() {
+	const email = emailInput1.value;
+	
+	fetch(`\${ctx}/member/existEmail`, {
+		method : "post", //.com 형식 보내기
+		headers : {
+			"Content-Type" : "application/json"
+		},
+		body : JSON.stringify({email})
+	})
+		.then(res => res.json())
+		.then(data => {
+			emailText1.innerText = data.message;
+		});
+});
+
+// 이메일 input의 값이 변경되었을 때
+emailInput1.addEventListener("keyup", function() { 
+	const oldValue = emailInput1.dataset.oldValue;//input에 data-old-value가 있으면 dataset에서 꺼내쓸 수 있음
+	const newValue = emailInput1.value;
+	if (oldValue == newValue) {
+		// 기존 이메일과 같으면 아무일도 일어나지 않음
+		emailText1.innerText = "";
+		emailButton1.setAttribute("disabled", "disabled");
+	} else {
+		// 기존 이메일과 다르면 중복체크 요청
+		emailText1.innerText = "이메일 중복확인을 해주세요.";
+		emailButton1.removeAttribute("disabled");
+	}
+});
+
 <%-- 암호 입력 일치하는지 확인 --%>
 const passwordInput1 = document.querySelector("#passwordInput1");
 const passwordInput2 = document.querySelector("#passwordInput2");
@@ -164,3 +202,11 @@ document.querySelector("#modalConfirmButton").addEventListener("click", function
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
