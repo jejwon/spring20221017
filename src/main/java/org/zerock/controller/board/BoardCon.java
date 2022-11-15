@@ -38,4 +38,10 @@ public class BoardCon {
 	 model.addAttribute("boardList", list); 
 	 }
 	
+	 @GetMapping("getEx")
+	 public void get(int id, Model model) {
+		 BoardDto1 board = service.get(id);
+		 
+		 model.addAttribute("board", board);
+	 }
 }

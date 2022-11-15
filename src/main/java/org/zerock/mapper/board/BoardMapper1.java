@@ -9,5 +9,7 @@ public interface BoardMapper1 {
 	int insert(BoardDto1 board);
 
 	List<BoardDto1> list();
+
+	BoardDto1 getById(int id);
 	
 }

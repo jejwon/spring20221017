@@ -18,4 +18,15 @@
  	FROM Board1 
  	ORDER BY id DESC
  	</select>
+ 	
+ 	<select id="getById" resultType="org.zerock.domain.board.BoardDto1">
+ 	SELECT 
+ 		id,
+ 		title,
+ 		writer,
+ 		inserted
+ 	FROM Board1
+ 	WHERE id = #{id}
+ 	</select>
+ 	
  </mapper>

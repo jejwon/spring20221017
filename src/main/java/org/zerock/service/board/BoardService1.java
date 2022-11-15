@@ -20,4 +20,9 @@ public class BoardService1 { //mapper에 넘기기
 	public List<BoardDto1> listBoard() {
 		return mapper.list();
 	}
+
+	public BoardDto1 get(int id) {
+		
+		return mapper.getById(id);
+	}
 }
